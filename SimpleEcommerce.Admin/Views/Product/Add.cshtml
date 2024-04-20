@@ -1,0 +1,49 @@
+﻿@using SimpleEcommerce.Application.Features.Products
+@model ProductVM
+
+
+    <h2>Product</h2>
+
+  <form asp-action="Add"  method="post" enctype="multipart/form-data">
+     
+    <input type="hidden" asp-for="ProductId" />
+      
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label"></label>
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Select Category", new { @class = "form-control" })
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageFile" class="control-label"></label>
+        @if(Model.ProductId > 0 )
+        {
+             <img asp-for="ImagePath" class="form-control" />
+        }
+        
+         <input asp-for="ImageFile" type="file" class="form-control"  name="ImageFile" >
+        
+
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+     </div>
+
+    <button type="submit" class="btn btn-primary">@if (Model.ProductId > 0) { <span>Edit</span> } else { <span>Add</span> }</button>
+</form>

@@ -1,0 +1,47 @@
+﻿@using SimpleEcommerce.Application.Features.Orders
+
+@model List<OrderVM>
+
+
+
+<p>
+    @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+    {
+        <div>
+            <label for="OrderDate">Date:</label>
+            <input type="date" id="OrderDate" name="startDate">
+
+            <button id="filterBtn">Filter</button>
+      </div>
+    }
+</p>
+<p>
+    <a asp-action="Add" asp-controller="Order" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th> 
+            <th>Order Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1; 
+        }
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@count</td> 
+                <td>@order.OrderDate</td>
+                <td>@order.Status</td>
+                 <td>
+                    <a asp-action="Add" asp-route-OrderId="@order.OrderId">Edit</a> |
+                    @*<a asp-action="Delete" asp-route-id="@order.OrderId" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>*@
+                </td>
+            </tr>
+            count++; 
+        }
+    </tbody>
+</table>

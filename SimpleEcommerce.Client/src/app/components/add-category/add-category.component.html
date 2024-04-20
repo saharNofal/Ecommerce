@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Add Category</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="CreateCategoryCommand.Name" name="name"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="CreateCategoryCommand.Description"
+                name="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,205 @@
+﻿@*@using SimpleEcommerce.Application.Features.Orders
+@model OrderVM
+
+@{
+    ViewBag.Title = "Create Order";
+}
+
+<h2>Create Order</h2>
+
+@using (Html.BeginForm("Add", "Order", FormMethod.Post))
+{
+    <div id="orderItems">
+    @if (Model != null)
+    {
+            <input type="hidden" asp-for="OrderId" />
+        for (var i = 0; i < Model.OrderItems.Count; i++)
+        {
+            
+            <div id="orderItem_@i" class="order-item">
+                <div class="form-group">
+                    <label for="ProductId_@i">Product:</label>
+                    <select name="OrderItems[@i].ProductId" class="form-control">
+                        <option value="">Select Product</option>
+                        @foreach (var prod in ViewBag.Products)
+                        {
+                            var isselected = (Model.OrderItems[i].ProductId == prod.ProductId ? "selected" : "");
+                            if(true)
+                                {
+                                    <option value="@prod.ProductId" selected >@prod.Name</option>
+                                }
+
+                                else
+                                {
+                                 <option value="@prod.ProductId" >@prod.Name</option>
+                                    
+                                }
+
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Quantity_@i">Quantity:</label>
+                    <input type="number" name="OrderItems[@i].Quantity" value="@Model.OrderItems[i].Quantity" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Price_@i">Price:</label>
+                    <input type="number" name="OrderItems[@i].Price" value="@Model.OrderItems[i].Price" class="form-control" />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+         <div id="orderItem_0" class="order-item">
+            <div class="form-group">
+                <label for="ProductId_0">Product:</label>
+                <select name="OrderItems[0].ProductId" class="form-control">
+                    <option value="">Select Product</option>
+                    @foreach (var prod in ViewBag.Products)
+                    {
+                        <option value="@prod.ProductId">@prod.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Quantity_0">Quantity:</label>
+                <input type="number" name="OrderItems[0].Quantity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Price_0">Price:</label>
+                <input type="number" name="OrderItems[0].Price" class="form-control" />
+            </div>
+            </div>
+     
+    }
+
+    
+     
+    </div>
+
+    <button type="button" class="btn btn-primary" id="addItemBtn">Add Item</button>
+    <button type="submit" class="btn btn-success">Create Order</button>
+}*@
+@using SimpleEcommerce.Application.Features.Orders
+@model OrderVM
+
+@{
+    ViewBag.Title = "Create Order";
+}
+
+<h2>Create Order</h2>
+
+@using (Html.BeginForm("Add", "Order", FormMethod.Post))
+{
+    <div id="orderItems" style="display: flex; flex-wrap: wrap;">
+    @if (Model != null)
+    {
+        <input type="hidden" asp-for="OrderId" />
+        @for (var i = 0; i < Model.OrderItems.Count; i++)
+        {
+            <div id="orderItem_@i" class="order-item" style="flex: 0 0 33.33%; padding: 10px;">
+                <div class="form-group">
+                    <label for="ProductId_@i">Product:</label>
+                    <select name="OrderItems[@i].ProductId" class="form-control">
+                        <option value="">Select Product</option>
+                        @foreach (var prod in ViewBag.Products)
+                        {
+                          var isselected = (Model.OrderItems[i].ProductId == prod.ProductId ? "selected" : "");
+                            if(true)
+                                {
+                                    <option value="@prod.ProductId" selected >@prod.Name</option>
+                                }
+
+                                else
+                                {
+                                 <option value="@prod.ProductId" >@prod.Name</option>
+                                    
+                                }                    
+                         }
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Quantity_@i">Quantity:</label>
+                    <input type="number" name="OrderItems[@i].Quantity" value="@Model.OrderItems[i].Quantity" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Price_@i">Price:</label>
+                    <input type="number" name="OrderItems[@i].Price" value="@Model.OrderItems[i].Price" class="form-control" />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div id="orderItem_0" class="order-item" style="flex: 0 0 33.33%; padding: 10px;">
+            <div class="form-group">
+                <label for="ProductId_0">Product:</label>
+                <select name="OrderItems[0].ProductId" class="form-control">
+                    <option value="">Select Product</option>
+                    @foreach (var prod in ViewBag.Products)
+                    {
+                        <option value="@prod.ProductId">@prod.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Quantity_0">Quantity:</label>
+                <input type="number" name="OrderItems[0].Quantity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Price_0">Price:</label>
+                <input type="number" name="OrderItems[0].Price" class="form-control" />
+            </div>
+        </div>
+    }
+
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" id="addItemBtn">Add Item</button>
+    <button type="button" class="btn btn-danger" id="removeItemBtn">Remove Item</button>
+    </div>
+    
+    <div>
+            <button type="submit" class="btn btn-success">Submit Order</button>
+
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            
+            // Add item button click event
+            $("#addItemBtn").click(function () {
+                var index = $('[id^="orderItem_"]').length;
+                // Clone the first order item and append it to the container
+                var newItem = $("#orderItem_0").clone();
+                debugger
+               // index=index-1;
+                // Increment the index and update IDs and names
+                newItem.attr("id", "orderItem_" + index);
+                newItem.find("select[name$='ProductId']").attr("name", "OrderItems[" + index + "].ProductId");
+                newItem.find("input[name$='Quantity']").attr("name", "OrderItems[" + index + "].Quantity");
+                newItem.find("input[name$='Price']").attr("name", "OrderItems[" + index + "].Price");
+                
+                // Append the new item to the container
+                $("#orderItems").append(newItem);
+            });
+
+              // Remove item button click event
+            $(document).on("click", "#removeItemBtn", function () {
+                var itemsCount = $('[id^="orderItem_"]').length;
+                // Ensure there's at least one item before removing
+                if (itemsCount > 1) {
+                    // Remove the last item from the DOM
+                    $("#orderItems .order-item:last").remove();
+                } else {
+                    alert("At least one item is required.");
+                }
+            });
+        });
+    </script>
+}
+
