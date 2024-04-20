@@ -66,10 +66,10 @@ namespace SimpleEcommerce.Admin.Controllers
                 string uniqueFileName = null;
                 if (product.ImageFile != null)
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + product.ImageFile.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    product.ImagePath= "/images/"+ uniqueFileName;
+                    product.ImagePath= "/uploads/" + uniqueFileName;
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         await product.ImageFile.CopyToAsync(fileStream);
@@ -105,6 +105,13 @@ namespace SimpleEcommerce.Admin.Controllers
            
             var wishlistList = await _mediator.Send( new GetProductByUserIdQuery(user.Id));
             return View(wishlistList);
+        }
+
+        public async Task<IActionResult> RemoveFromWishList(int ProductId)
+        {
+
+             await _mediator.Send(new DeleteWishlistCommand(ProductId));
+            return RedirectToAction("WishList", "Product");
         }
     }
 

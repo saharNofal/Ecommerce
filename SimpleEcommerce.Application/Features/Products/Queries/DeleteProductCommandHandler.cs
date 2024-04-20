@@ -22,11 +22,9 @@ namespace SimpleEcommerce.Application.Features.Products.Queries
     }
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
     {
-        //private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
         public DeleteProductCommandHandler(IUnitOfWork unitOfWork)
         {
-           // _productRepository = productRepository;
            _unitOfWork = unitOfWork;
         }
 

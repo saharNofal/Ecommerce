@@ -1,15 +1,17 @@
 ﻿@using SimpleEcommerce.Application.Features.Products
 @model IEnumerable<ProductVM>
 
-
 @foreach (var item in Model)
-        {
-            <div class="card" style="width: 18rem;">
-            <img src="@item.ImagePath" class="card-img-top" alt="...">
-            <div class="card-body">
+{
+    <div class="card" style="width: 18rem;">
+        <img src="@item.ImagePath" class="card-img-top" alt="...">
+        <div class="card-body">
             <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">@item.Description.</p>
-            @*<a href="#" class="btn btn-primary">Go somewhere</a>*@ 
-            </div>
-            </div>
-        }
+            <p class="card-text">@item.Description</p>
+            <a asp-action="RemoveFromWishList" class="btn btn-primary add-to-order" asp-route-ProductId="@item.ProductId">Remove</a>
+
+        </div>
+    </div>
+}
+
+
