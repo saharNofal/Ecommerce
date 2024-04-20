@@ -20,6 +20,8 @@ export class ProductService {
     addProduct(formData: any) {
         debugger;
         return this.http.post<any>(`${this.apiUrl}/Products/AddEditProduct`, formData);
+
+      
     }
 
     uploadImage(file: File): Observable<any> {

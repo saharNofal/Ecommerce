@@ -44,19 +44,6 @@ namespace SimpleEcommerce.Api.Controllers
 
             try
             {
-                //string uniqueFileName = null;
-                //if (product.ImageFile != null)
-                //{
-                //    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                //    uniqueFileName = Guid.NewGuid().ToString() + "_" + product.ImageFile.FileName;
-                //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                //    product.ImagePath = "/images/" + uniqueFileName;
-                //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        await product.ImageFile.CopyToAsync(fileStream);
-                //    }
-                //}
-
                 var productId = await _mediator.Send(product);
                 return CreatedAtRoute("GetProductById", new { productId }, product);
             }
@@ -92,8 +79,8 @@ namespace SimpleEcommerce.Api.Controllers
             {
                 await file.CopyToAsync(stream);
             }
-
-            return Ok(new { Path = filePath });
+          var ImagePath = "/uploads/" + uniqueFileName;
+            return Ok(new { Path = ImagePath });
         }
 
     }

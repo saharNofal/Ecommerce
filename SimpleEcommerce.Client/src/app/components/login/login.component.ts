@@ -22,11 +22,11 @@ export class LoginComponent {
     this.authService.login(this.email, this.password)
       .subscribe(
         (response: LoginResponse) => {
-          debugger;
           localStorage.setItem('token', response.token);
           this.onLoggedIn.emit(true);
-           },
+        },
         error => {
+          console.error('Login failed: ', error);
         }
       );
   }

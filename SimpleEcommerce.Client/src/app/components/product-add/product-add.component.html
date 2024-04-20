@@ -1,19 +1,19 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="productName">Product Name:</label>
-    <input type="text" class="form-control" id="productName" formControlName="Name">
+    <label for="Name">Product Name:</label>
+    <input type="text" class="form-control" id="Name" formControlName="Name">
   </div>
   <div class="form-group">
-    <label for="productPrice">Price:</label>
-    <input type="number" class="form-control" id="productPrice" formControlName="Price">
+    <label for="Price">Price:</label>
+    <input type="number" class="form-control" id="Price" formControlName="Price">
   </div>
   <div class="form-group">
-    <label for="productDescription">Description:</label>
-    <textarea class="form-control" id="productDescription" formControlName="Description"></textarea>
+    <label for="Description">Description:</label>
+    <textarea class="form-control" id="Description" formControlName="Description"></textarea>
   </div>
   <div class="form-group">
-    <label for="productCategory">Category:</label>
-    <select class="form-control" id="productCategory" formControlName="CategoryId">
+    <label for="CategoryId">Category:</label>
+    <select class="form-control" id="CategoryId" formControlName="CategoryId">
       <option value="" selected disabled>Select Category</option>
       <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</option>
     </select>

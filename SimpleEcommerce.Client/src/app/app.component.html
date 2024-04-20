@@ -1,9 +1,3 @@
-<div style="text-align:center">
-  <h1>Welcome to Your App!</h1>
-</div>
-
-<app-login></app-login>
-
 <div *ngIf="isLoggedIn; else notLoggedIn">
   <div class="app-nav">
     <app-nav></app-nav>
@@ -15,4 +9,5 @@
 
 <ng-template #notLoggedIn>
   <p>Please log in to continue.</p>
+  <app-login (onLoggedIn)="isLoggedIn = true"></app-login>
 </ng-template>

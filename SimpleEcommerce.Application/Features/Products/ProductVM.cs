@@ -22,8 +22,8 @@ namespace SimpleEcommerce.Application.Features.Products
         public string Name { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
-        public IFormFile ImageFile { get; set; }
-        public string ImagePath { get; set; } = string.Empty;
+        public IFormFile? ImageFile { get; set; }
+        public string? ImagePath { get; set; } = string.Empty;
         public int CategoryId { get; set; }
 
 

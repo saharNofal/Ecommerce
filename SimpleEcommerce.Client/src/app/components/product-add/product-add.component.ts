@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductService } from './product.service';
 
 @Component({
@@ -11,40 +12,35 @@ export class ProductAddComponent implements OnInit {
   productForm: FormGroup;
   categories: any[] = []; // Change to array to hold multiple category objects
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor(private fb: FormBuilder, 
+              private productService: ProductService,
+              private router: Router) {
     this.productForm = this.fb.group({
       Name: ['', Validators.required],
-      Price: ['', Validators.required],
+      Price: [0, Validators.required],
       Description: [''],
       CategoryId: ['', Validators.required],
-      ImageFile: [''],
-      ImagePath: ""
+      ImagePath: ''
     });
   }
 
   ngOnInit(): void {
     this.productService.getCategories().subscribe((categories: any[]) => {
-      debugger;
       this.categories = categories;
     });
-
-
   }
 
   onSubmit(): void {
     if (this.productForm.valid) {
       const formData = this.productForm.value;
 
-      formData.price = parseFloat(formData.price);
-
       this.productService.addProduct(formData).subscribe(
-        (response) => {
-
+        (response: any) => {
           console.log('Product added successfully:', response);
-          // Optionally, reset the form after successful submission
           this.productForm.reset();
+          this.router.navigate(['/Product']);
         },
-        (error) => {
+        (error: any) => {
           console.error('Error adding product:', error);
         }
       );
@@ -66,5 +62,4 @@ export class ProductAddComponent implements OnInit {
       );
     }
   }
-
 }
