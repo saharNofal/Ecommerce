@@ -8,17 +8,13 @@ import { Observable } from 'rxjs';
 export class ProductService {
   private baseUrl = 'https://localhost:7043/api';
   constructor(private http: HttpClient) { }
-
-  getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/Products/GetProductByCategory`);
-  }
-
   getCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/Category/all`);
   }
 
   getProductById(productId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/Products/GetProductByCategory/${productId}`);
+    debugger;
+    return this.http.get<any>(`${this.baseUrl}/Products/GetProductByCategory?categoryId=${productId}`);
   }
 
   addProduct(product: any): Observable<any> {

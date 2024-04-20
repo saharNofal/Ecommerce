@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { FormsModule } from '@angular/forms';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { LoginComponent } from './components/login/login.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,11 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+
+  ]
+  ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

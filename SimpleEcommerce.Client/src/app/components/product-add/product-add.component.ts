@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from './product.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-product',
@@ -10,10 +11,14 @@ import { ProductService } from './product.service';
 })
 export class ProductAddComponent implements OnInit {
   productForm: FormGroup;
-  categories: any[] = []; // Change to array to hold multiple category objects
+  productId: number = 0;
+
+  categories: any[] = []; 
 
   constructor(private fb: FormBuilder, 
               private productService: ProductService,
+              private route: ActivatedRoute,
+              private http: HttpClient,
               private router: Router) {
     this.productForm = this.fb.group({
       Name: ['', Validators.required],
@@ -25,9 +30,27 @@ export class ProductAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
+    this.productId = this.route.snapshot.params['productId'];
+    if(this.productId!= null)
+      {
+        this.loadProudct(this.productId )
+      }
+   
     this.productService.getCategories().subscribe((categories: any[]) => {
       this.categories = categories;
     });
+  }
+
+  
+  loadProudct(productId: number): void {
+    debugger;
+    this.http.get<any>('https://localhost:7043/api/Products/GetProductById?proudectId=' + productId)
+      .subscribe(product => {
+        debugger;
+        this.productForm.patchValue(product);
+
+      });
   }
 
   onSubmit(): void {

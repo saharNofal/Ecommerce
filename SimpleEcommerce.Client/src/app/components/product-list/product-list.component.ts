@@ -1,6 +1,7 @@
+// product-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService } from './product.service'; // Import ProductService
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,12 +17,12 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.loadProducts(0);
     this.loadCategories();
   }
 
-  loadProducts(): void {
-    this.productService.getProducts().subscribe((products: any[]) => {
+  loadProducts(categoryId: any): void {
+    this.productService.getProductById(categoryId).subscribe((products: any[]) => {
       this.products = products;
       this.filterProducts();
     });
@@ -35,7 +36,7 @@ export class ProductListComponent implements OnInit {
 
   filterProducts(): void {
     this.filteredProducts = this.selectedCategory ?
-      this.products.filter(product => product.CategoryId == this.selectedCategory) :
+      this.products.filter(product => product.categoryId == this.selectedCategory) :
       this.products;
   }
 
@@ -45,7 +46,7 @@ export class ProductListComponent implements OnInit {
   }
 
   editProduct(productId: number): void {
-    this.router.navigate(['/edit-product', productId]);
+    this.router.navigate(['/EditProduct', productId]);
   }
 
   deleteProduct(productId: number): void {
@@ -53,7 +54,7 @@ export class ProductListComponent implements OnInit {
       this.productService.deleteProduct(productId).subscribe(
         () => {
           console.log('Product deleted successfully');
-          this.loadProducts();
+          this.loadProducts(this.selectedCategory);
         },
         (error: any) => {
           console.error('Error deleting product:', error);

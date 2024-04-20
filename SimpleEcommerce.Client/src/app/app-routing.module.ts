@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'edit-category/:categoryId', component: EditCategoryComponent },
   { path: 'Product', component: ProductListComponent },
   { path: 'AddProduct', component: ProductAddComponent },
-
+  { path: 'EditProduct/:productId', component: ProductAddComponent },
 
 ];
 
