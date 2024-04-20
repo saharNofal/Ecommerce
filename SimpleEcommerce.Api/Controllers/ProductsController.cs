@@ -53,7 +53,7 @@ namespace SimpleEcommerce.Api.Controllers
             }
         }
 
-        [HttpDelete("DeleteProduct/{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _mediator.Send(new DeleteProductCommand(id));

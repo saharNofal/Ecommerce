@@ -30,15 +30,7 @@ namespace SimpleEcommerce.Application.Features.Products.Queries
            _unitOfWork = unitOfWork;
         }
 
-        //public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
-        //{
-        //    var productToDelete = await _productRepository.GetByIdAsync(request.ProductId);
-
-        //    if (productToDelete != null)
-        //    await _productRepository.DeleteAsync(productToDelete);
-
-        //    return Unit.Value;
-        //}
+      
 
          async Task  IRequestHandler<DeleteProductCommand>.Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
@@ -47,6 +39,7 @@ namespace SimpleEcommerce.Application.Features.Products.Queries
             if (productToDelete != null)
                 await _unitOfWork.ProductRepository.DeleteAsync(productToDelete);
                 
+            await _unitOfWork.CommitAsync();
             
         }
     }

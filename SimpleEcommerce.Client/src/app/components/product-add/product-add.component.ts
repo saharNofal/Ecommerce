@@ -25,7 +25,8 @@ export class ProductAddComponent implements OnInit {
       Price: [0, Validators.required],
       Description: [''],
       CategoryId: ['', Validators.required],
-      ImagePath: ''
+      ImagePath: '',
+      ProductId:0
     });
   }
 
@@ -48,8 +49,14 @@ export class ProductAddComponent implements OnInit {
     this.http.get<any>('https://localhost:7043/api/Products/GetProductById?proudectId=' + productId)
       .subscribe(product => {
         debugger;
-        this.productForm.patchValue(product);
-
+        this.productForm.patchValue({
+          Name: product.name,
+          ProductId:product.productId,
+          Price: product.price,
+          Description: product.description,
+          CategoryId: product.categoryId,
+          ImagePath: product.imagePath 
+        });
       });
   }
 
