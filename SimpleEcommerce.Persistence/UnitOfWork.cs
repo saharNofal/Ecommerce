@@ -26,6 +26,8 @@ namespace SimpleEcommerce.Persistence
         private ICategoryRepository _CategoryRepository;
         private IProductRepository _ProductRepository;
         private IWishlistRepository _WishlistRepository;
+        private IMessageNotificationRepository _MessageNotificationRepository;
+        private INotificationSettingsRepository _NotificationSettingsRepository;
 
         public IOrderRepository OrderRepository => _OrderRepository ??= new OrderRepository(_dbContext);
 
@@ -34,6 +36,8 @@ namespace SimpleEcommerce.Persistence
         public IProductRepository ProductRepository => _ProductRepository ??= new ProductRepository(_dbContext);
 
         public IWishlistRepository WishlistRepository => _WishlistRepository ??= new WishlistRepository(_dbContext);
+        public INotificationSettingsRepository NotificationSettingsRepository => _NotificationSettingsRepository ??= new NotificationSettingsRepository(_dbContext);
+        public IMessageNotificationRepository MessageNotificationRepository => _MessageNotificationRepository ??= new MessageNotificationRepository(_dbContext);
 
 
 

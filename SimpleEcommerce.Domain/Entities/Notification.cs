@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace SimpleEcommerce.Domain.Entities
 {
-    public class Notification
+    public class NotificationSettings
     {
-        public int NotificationId { get; set; }
+        public int NotificationSettingsId { get; set; }
         public string UserId { get; set; }= string.Empty;
         public string GroupName { get; set; } = string.Empty;
         public string ConnectionId { get; set; } = string.Empty;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+    }
+    public class MessageNotification
+    {
+        public int MessageNotificationId { get; set; }
+        public string Message { get; set; }=string.Empty;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

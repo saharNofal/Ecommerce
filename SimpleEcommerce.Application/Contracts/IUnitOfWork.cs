@@ -16,6 +16,8 @@ namespace SimpleEcommerce.Application.Contracts
         public ICategoryRepository CategoryRepository { get; }
         public IProductRepository ProductRepository { get; }
         public IWishlistRepository WishlistRepository { get; }
+        public INotificationSettingsRepository NotificationSettingsRepository { get; }
+        public IMessageNotificationRepository MessageNotificationRepository { get; }
         Task CommitAsync();
     }
 }

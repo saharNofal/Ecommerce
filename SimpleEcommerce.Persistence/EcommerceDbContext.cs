@@ -28,6 +28,10 @@ namespace SimpleEcommerce.Persistence
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Wishlist> Wishlist { get; set; }
 
+        public DbSet<NotificationSettings> NotificationSettings { get; set; }
+        public DbSet<MessageNotification> MessageNotifications { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
