@@ -7,7 +7,7 @@ using SimpleEcommerce.Application.Features.Products.Queries;
 
 namespace SimpleEcommerce.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase

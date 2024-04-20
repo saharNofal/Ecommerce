@@ -1,1 +1,35 @@
-<p>product-list works!</p>
+<div class="container">
+    <h2>Product List</h2>
+    <div class="form-group">
+      <label for="categoryFilter">Filter by Category:</label>
+      <select class="form-control" id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+        <option value="">All</option>
+        <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</option>
+      </select>
+    </div>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of filteredProducts">
+          <td>{{ product.Name }}</td>
+          <td>{{ product.Price }}</td>
+          <td>{{ product.Description }}</td>
+          <td>{{ getCategoryName(product.CategoryId) }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editProduct(product)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.productId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

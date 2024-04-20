@@ -8,8 +8,8 @@ using SimpleEcommerce.Application.Features.Catagory.Queries.GetCategoryId;
 
 namespace SimpleEcommerce.Api.Controllers
 {
-    //[Authorize]
-    //[ApiController]
+    [Authorize]
+    [ApiController]
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {

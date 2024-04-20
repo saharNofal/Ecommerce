@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Define an interface for the login response
 interface LoginResponse {
   token: string;
 }
@@ -10,7 +9,7 @@ interface LoginResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<LoginResponse> {
