@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SimpleEcommerce.Application.Features.Notifications;
 using SimpleEcommerce.Application.Features.Users;
 using SimpleEcommerce.Persistence;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,29 +22,24 @@ namespace SimpleEcommerce.Api.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public LoginController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration config)
+        private readonly IMediator _mediator;
+        public LoginController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration config,IMediator mediator)
         {
 
             _signInManager = signInManager;
             _config = config;
             _userManager = userManager;
-
+            _mediator = mediator;
           
         }
-
-
-       
-
-
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                // Generate JWT token
                 var token = GenerateJwtToken(model.Email);
+
                 return Ok(new { token });
             }
             else

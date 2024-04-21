@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Notifications\Queries\" />
     <Folder Include="Features\WishList\Queries\" />
   </ItemGroup>
 

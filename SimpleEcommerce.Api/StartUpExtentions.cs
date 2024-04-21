@@ -43,6 +43,7 @@ namespace SimpleEcommerce.Api
             });
             builder.Services.AddAuthorization();
 
+            builder.Services.AddSignalR();
 
             return builder.Build();
         }
@@ -60,6 +61,7 @@ namespace SimpleEcommerce.Api
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
+            app.MapHub<NotificationHub>("/NotificationHub");
 
             return app;
         }
