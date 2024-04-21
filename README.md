@@ -2,6 +2,8 @@
 
 - User authentication (login, logout)
 - Product browsing
+- Make Orders
+  
 
 ## Installation
 
