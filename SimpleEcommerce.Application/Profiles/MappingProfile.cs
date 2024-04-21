@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SimpleEcommerce.Application.Features.Catagory.Commands.CreateCategory;
 using SimpleEcommerce.Application.Features.Catagory.Queries.GetCategories;
+using SimpleEcommerce.Application.Features.Notifications;
 using SimpleEcommerce.Application.Features.Orders;
 using SimpleEcommerce.Application.Features.Products;
 using SimpleEcommerce.Application.Features.WishList;
@@ -19,7 +20,7 @@ namespace SimpleEcommerce.Application.Profiles
             CreateMap<Order, OrderVM>().ReverseMap();
             CreateMap<OrderItem, OrderItemVM>().ReverseMap();
             CreateMap<Wishlist, WishlistMV>().ReverseMap();
-          //  CreateMap<List<Product>,List<ProductVM>>().ReverseMap();
+            CreateMap<NotificationSettings, NotificationVM>().ReverseMap();
 
         }
     }

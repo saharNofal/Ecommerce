@@ -39,6 +39,15 @@ namespace SimpleEcommerce.Api.Controllers
             if (result.Succeeded)
             {
                 var token = GenerateJwtToken(model.Email);
+                var user = await _signInManager.UserManager.FindByEmailAsync(model.Email);
+                 NotificationVM notificationVM = new NotificationVM()
+                 {
+                     ConnectionId = user.Id,
+                     GroupName="",
+                     CreatedDate = DateTime.Now,
+                     UserId = user.Id
+                 };
+               await _mediator.Send(notificationVM);
 
                 return Ok(new { token });
             }
