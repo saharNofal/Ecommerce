@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SimpleEcommerce.Admin;
 using SimpleEcommerce.Application;
 using SimpleEcommerce.Persistence;
 
@@ -10,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationService();
 builder.Services.AddPersistenceService(builder.Configuration);
-builder.Services.AddSignalR();
 
 var app = builder.Build();
 

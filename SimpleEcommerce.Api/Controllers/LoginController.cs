@@ -43,7 +43,7 @@ namespace SimpleEcommerce.Api.Controllers
                  NotificationVM notificationVM = new NotificationVM()
                  {
                      ConnectionId = user.Id,
-                     GroupName="",
+                     GroupName="Client",
                      CreatedDate = DateTime.Now,
                      UserId = user.Id
                  };

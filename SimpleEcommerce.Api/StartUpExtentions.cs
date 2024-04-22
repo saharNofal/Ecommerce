@@ -43,7 +43,7 @@ namespace SimpleEcommerce.Api
             });
             builder.Services.AddAuthorization();
 
-            builder.Services.AddSignalR();
+           
 
             return builder.Build();
         }

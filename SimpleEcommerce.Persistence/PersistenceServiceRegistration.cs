@@ -26,13 +26,11 @@ namespace SimpleEcommerce.Persistence
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<EcommerceDbContext>();
-            //services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
-            //services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //services.AddScoped<IOrderRepository, OrderRepository>();
-            //services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
+                .AddEntityFrameworkStores<EcommerceDbContext>();   
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSignalR();
+
+
             return services;
         }
     }

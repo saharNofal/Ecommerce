@@ -62,9 +62,9 @@ namespace SimpleEcommerce.Admin.Controllers
                  await _mediator.Send(order);
                 if(order.OrderId== 0)
                 {
-                    await _hubContext.Groups.AddToGroupAsync(user.Id, "Admins");
 
                     await _hubContext.Clients.Group("Admins").SendAsync("NewOrder", $"{user.UserName} Create a new order number {order.OrderId}.");
+
                     
                 }
                 return RedirectToAction("Index", "Order");
